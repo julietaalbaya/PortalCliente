@@ -1,0 +1,74 @@
+@page "/facturas"
+@using MudBlazor
+
+<MudPaper Class="pa-0" Elevation="0">
+	<MudTable Items="filteredInvoices" Dense="true" Hover="true">
+		<ToolBarContent>
+            <MudText Typo="Typo.h6">Mis facturas</MudText>
+            <MudSpacer />
+            <div>
+                <MudTextField Placeholder="Buscar por número de factura" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" @bind-Value="searchTerm" Style="width:320px"/>
+            </div>
+            <MudSpacer />
+            <div>
+                <MudDatePicker Label="Desde" @bind-Date="desde" />            
+                <MudSpacer />
+                <MudDatePicker Label="Hasta" @bind-Date="hasta" />
+            </div>           
+        </ToolBarContent>        
+        <HeaderContent>
+			<MudTh>Fecha</MudTh>
+			<MudTh>Factura N°</MudTh>
+			<MudTh>Estado</MudTh>
+			<MudTh align="Right">Monto</MudTh>
+			<MudTh>Acciones</MudTh>
+		</HeaderContent>
+		<RowTemplate>
+			<MudTd DataLabel="Fecha">@context.Fecha.ToString("dd/MM/yyyy")</MudTd>
+			<MudTd DataLabel="Factura">@context.Numero</MudTd>
+			<MudTd DataLabel="Estado">
+				@if (context.Estado == "PAGA")
+				{
+					<MudChip T="string" Color="Color.Success" Variant="Variant.Filled" Size="Size.Small">@context.Estado</MudChip>
+				}
+				else
+				{
+					<MudChip T="string" Color="Color.Error" Variant="Variant.Filled" Size="Size.Small">@context.Estado</MudChip>
+				}
+			</MudTd>
+			<MudTd DataLabel="Monto" align="Right">@context.Monto.ToString("C")</MudTd>
+			<MudTd DataLabel="Acciones">
+				<MudIconButton Icon="Icons.Material.Filled.Visibility" Color="Color.Default" Size="Size.Small" />
+				<MudIconButton Icon="Icons.Material.Filled.FileDownload" Color="Color.Default" Size="Size.Small" />
+			</MudTd>
+		</RowTemplate>
+		<PagerContent>
+			<MudTablePager PageSizeOptions="new int[] {5,10,20}" />
+		</PagerContent>
+	</MudTable>
+</MudPaper>
+
+@code {
+	private string searchTerm = string.Empty;
+	private DateTime? desde = null;
+	private DateTime? hasta = null;
+
+	private record Factura(DateTime Fecha, string Numero, string Estado, decimal Monto);
+
+	private List<Factura> invoices = new List<Factura>
+	{
+		new Factura(DateTime.Parse("2024-01-13"), "A00045-00106586", "IMPAGA", 224271.45m),
+		new Factura(DateTime.Parse("2024-01-02"), "A00045-00106082", "IMPAGA", 46408.76m),
+		new Factura(DateTime.Parse("2023-12-11"), "A00045-00105097", "PAGA", 598809.11m),
+		new Factura(DateTime.Parse("2023-12-11"), "A00045-00105096", "PAGA", 3363798.03m),
+		new Factura(DateTime.Parse("2024-01-13"), "A00045-00104932", "PAGA", 154657.99m),
+		new Factura(DateTime.Parse("2024-01-13"), "A00045-00104567", "PAGA", 73876.00m),
+		new Factura(DateTime.Parse("2024-01-13"), "A00045-00104356", "PAGA", 4579.32m),
+		new Factura(DateTime.Parse("2024-01-13"), "A00045-00102009", "PAGA", 5987443.00m),
+	};
+
+	private IEnumerable<Factura> filteredInvoices => invoices
+		.Where(i => string.IsNullOrWhiteSpace(searchTerm) || i.Numero.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+		.Where(i => (!desde.HasValue || i.Fecha >= desde.Value.Date) && (!hasta.HasValue || i.Fecha <= hasta.Value.Date))
+		.OrderByDescending(i => i.Fecha);
+}

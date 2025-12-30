@@ -1,0 +1,64 @@
+@page "/compras"
+@using MudBlazor
+
+<MudPaper Class="pa-0" Elevation="0">
+	<MudTable Items="filteredCompras" Dense="true" Hover="true">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Mis compras</MudText>
+            <MudSpacer />
+			<div>
+				<MudTextField Placeholder="Buscar por id o estado" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" @bind-Value="search" Style="width:320px" />
+			</div>
+        </ToolBarContent>
+		<HeaderContent>
+			<MudTh>Id</MudTh>
+			<MudTh>Precio</MudTh>
+			<MudTh>Estado</MudTh>
+			<MudTh>Acciones</MudTh>
+		</HeaderContent>
+		<RowTemplate>
+			<MudTd DataLabel="Id">@context.Id</MudTd>
+			<MudTd DataLabel="Precio">$@context.Precio.ToString("N2")</MudTd>
+			<MudTd DataLabel="Estado">
+				@if (context.Estado == "Entregada")
+				{
+					<MudChip T="string" Color="Color.Success" Size="Size.Small">@context.Estado</MudChip>
+				}
+				else if (context.Estado == "Devuelta")
+				{
+					<MudChip T="string" Color="Color.Warning" Size="Size.Small">@context.Estado</MudChip>
+				}
+				else
+				{
+					<MudChip T="string" Color="Color.Info" Size="Size.Small">@context.Estado</MudChip>
+				}
+			</MudTd>
+			<MudTd DataLabel="Acciones">
+				<MudIconButton Icon="Icons.Material.Filled.Visibility" Color="Color.Default" Size="Size.Small" />
+			</MudTd>
+		</RowTemplate>
+		<PagerContent>
+			<MudTablePager PageSizeOptions="new int[] {5,10,20}" />
+		</PagerContent>
+	</MudTable>
+</MudPaper>
+
+@code {
+	private string search = string.Empty;
+
+	private record Compra(string Id, decimal Precio, string Estado);
+
+	private List<Compra> compras = new List<Compra>
+	{
+		new Compra("C-1001", 1250.50m, "Entregada"),
+		new Compra("C-1002", 399.99m, "Pendiente de entrega"),
+		new Compra("C-1003", 59.90m, "Devuelta"),
+		new Compra("C-1004", 2450.00m, "Entregada"),
+		new Compra("C-1005", 129.00m, "Pendiente de entrega"),
+	};
+
+	private IEnumerable<Compra> filteredCompras => compras
+		.Where(c => string.IsNullOrWhiteSpace(search)
+			|| c.Id.Contains(search, StringComparison.OrdinalIgnoreCase)
+			|| c.Estado.Contains(search, StringComparison.OrdinalIgnoreCase));
+}

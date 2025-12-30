@@ -1,0 +1,123 @@
+@page "/mis-datos"
+@using MudBlazor
+
+<MudText Typo="Typo.h5" GutterBottom="true">Mis datos</MudText>
+
+<MudGrid>
+    <MudItem xs="12" md="8">
+        <MudPaper Class="pa-4" Elevation="0">
+            <MudGrid>
+                <MudItem xs="12" sm="6">
+                    <MudSelect T="string" @bind-Value="personaTipo" Dense="true" FullWidth="true">
+                    @foreach (var option in personaOptions)
+                    {
+                        <MudSelectItem T="string" Value="@option">@option</MudSelectItem>
+                    }
+                    </MudSelect>
+                </MudItem>
+                    
+                <MudItem xs="12" sm="6">
+                    <MudTextField Label="CUIL/CUIT" @bind-Value="cuil" Variant="Variant.Outlined" FullWidth="true" />
+                </MudItem>
+
+                <MudItem xs="12" sm="6">
+                    <MudTextField Label="Nombre(s)" @bind-Value="nombre" Variant="Variant.Outlined" FullWidth="true" />
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                    <MudTextField Label="Apellido(s)" @bind-Value="apellido" Variant="Variant.Outlined" FullWidth="true" />
+                </MudItem>
+
+                <MudItem xs="12" sm="6">
+                    <MudTextField Label="Correo electrónico" @bind-Value="email" Variant="Variant.Outlined" FullWidth="true" />
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                    <MudTextField Label="DNI" @bind-Value="dni" Variant="Variant.Outlined" FullWidth="true" />
+                </MudItem>
+            </MudGrid>
+        </MudPaper>
+
+        <MudGrid Class="mt-4">
+            <MudItem xs="12" sm="6">
+                <MudPaper Elevation="1" Class="pa-4">
+                    <MudStack>
+                        <MudText Typo="Typo.subtitle2">Teléfono 1</MudText>
+                        <MudText Typo="Typo.body2">@telefono1</MudText>
+                        <div class="d-flex justify-content-end">
+                            <MudIconButton Icon="Icons.Material.Filled.Edit" Color="Color.Default" />
+                            <MudIconButton Icon="Icons.Material.Filled.Delete" Color="Color.Default" />
+                        </div>
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudPaper Elevation="1" Class="pa-4">
+                    <MudStack>
+                        <MudText Typo="Typo.subtitle2">Teléfono 2</MudText>
+                        <MudText Typo="Typo.body2">@telefono2</MudText>
+                        <div class="d-flex justify-content-end">
+                            <MudIconButton Icon="Icons.Material.Filled.Edit" Color="Color.Default" />
+                            <MudIconButton Icon="Icons.Material.Filled.Delete" Color="Color.Default" />
+                        </div>
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
+
+        <div class="mt-3 d-flex justify-content-end">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="Icons.Material.Filled.Add">Agregar teléfono</MudButton>
+        </div>
+
+        <MudGrid Class="mt-4">
+            <MudItem xs="12" sm="6">
+                <MudPaper Elevation="1" Class="pa-4">
+                    <MudText Typo="Typo.subtitle2">Dirección 1</MudText>
+                    <MudText Typo="Typo.body2">@direccion1</MudText>
+                    <div class="d-flex justify-content-end">
+                        <MudIconButton Icon="Icons.Material.Filled.Edit" Color="Color.Default" />
+                        <MudIconButton Icon="Icons.Material.Filled.Delete" Color="Color.Default" />
+                    </div>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudPaper Elevation="1" Class="pa-4">
+                    <MudText Typo="Typo.subtitle2">Dirección 2</MudText>
+                    <MudText Typo="Typo.body2">@direccion2</MudText>
+                    <div class="d-flex justify-content-end">
+                        <MudIconButton Icon="Icons.Material.Filled.Edit" Color="Color.Default" />
+                        <MudIconButton Icon="Icons.Material.Filled.Delete" Color="Color.Default" />
+                    </div>
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
+
+        <div class="mt-3 d-flex justify-content-end">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="Icons.Material.Filled.Add">Agregar dirección</MudButton>
+        </div>
+    </MudItem>
+
+    <MudItem xs="12" md="4">
+        <MudPaper Class="pa-4" Elevation="0">
+            <MudText Typo="Typo.h6">Resumen</MudText>
+            <MudDivider Class="my-2" />
+            <MudText Typo="Typo.body2"><b>Nombre:</b> @nombre @apellido</MudText>
+            <MudText Typo="Typo.body2"><b>Email:</b> @email</MudText>
+            <MudText Typo="Typo.body2"><b>CUIL:</b> @cuil</MudText>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code {
+    private string personaTipo = "Persona Física";
+    private string nombre = "Raúl";
+    private string apellido = "Sosa";
+    private string email = "raulsosa@gmail.com";
+    private string cuil = "20-12870558-4";
+    private string dni = "12870558";
+
+    private string telefono1 = "(0298) 4433619";
+    private string telefono2 = "(0298) 4433619";
+
+    private string direccion1 = "Leandro N. Alem n° 2244\nPiso: PB Depto: 3\nBarrio: Villa Obrera\nCP:8332\nEntre calles: General Roca y Rio Negro";
+    private string direccion2 = "Leandro N. Alem n° 2244\nPiso: PB Depto: 3\nBarrio: Villa Obrera\nCP:8332\nEntre calles: General Roca y Rio Negro";
+    private readonly string[] personaOptions = { "Persona Física", "Persona Jurídica" };
+}

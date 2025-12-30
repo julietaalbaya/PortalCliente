@@ -1,0 +1,96 @@
+@page "/"
+
+<MudText Typo="Typo.h5" GutterBottom="true">Inicio</MudText>
+<MudText Typo="Typo.body2" Class="mb-4">
+    Resumen rápido de tu cuenta (datos de ejemplo por ahora).
+</MudText>
+
+<MudGrid>
+
+    <!-- Tarjeta 1 -->
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Class="pa-4" Elevation="1">
+            <MudText Typo="Typo.subtitle2">Resumen de cuenta</MudText>
+            <MudText Typo="Typo.h4">$ 128.450</MudText>
+            <MudText Typo="Typo.caption">Actualizado hoy</MudText>
+        </MudPaper>
+    </MudItem>
+
+    <!-- Tarjeta 2 -->
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Class="pa-4" Elevation="1">
+            <MudText Typo="Typo.subtitle2">Facturas pendientes</MudText>
+            <MudText Typo="Typo.h4">2</MudText>
+            <MudText Typo="Typo.caption">Vencen esta semana</MudText>
+        </MudPaper>
+    </MudItem>
+
+    <!-- Tarjeta 3 -->
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Class="pa-4" Elevation="1">
+            <MudText Typo="Typo.subtitle2">Última compra</MudText>
+            <MudText Typo="Typo.h4">24/12</MudText>
+            <MudText Typo="Typo.caption">Orden #A-1042</MudText>
+        </MudPaper>
+    </MudItem>
+
+    <!-- Tarjeta 4 -->
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Class="pa-4" Elevation="1">
+            <MudText Typo="Typo.subtitle2">Autorizaciones</MudText>
+            <MudText Typo="Typo.h4">Activa</MudText>
+            <MudText Typo="Typo.caption">Sin bloqueos</MudText>
+        </MudPaper>
+    </MudItem>
+
+    <!-- Bloque grande: tabla / lista -->
+    <MudItem xs="12" md="8">
+        <MudPaper Class="pa-4 mt-2" Elevation="1">
+            <MudText Typo="Typo.h6" GutterBottom="true">Movimientos recientes</MudText>
+
+            <MudTable Items="_movimientos" Dense="true" Hover="true">
+                <HeaderContent>
+                    <MudTh>Fecha</MudTh>
+                        <MudTh>Detalle</MudTh>
+                        <MudTh align="Right">Importe</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Fecha">@context.Fecha</MudTd>
+                    <MudTd DataLabel="Detalle">@context.Detalle</MudTd>
+                    <MudTd DataLabel="Importe" align="Right">@context.Importe</MudTd>
+                </RowTemplate>
+            </MudTable>
+        </MudPaper>
+    </MudItem>
+
+    <!-- Bloque lateral -->
+    <MudItem xs="12" md="4">
+        <MudPaper Class="pa-4 mt-2" Elevation="1">
+            <MudText Typo="Typo.h6" GutterBottom="true">Accesos rápidos</MudText>
+
+            <MudStack Spacing="2">
+                <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ReceiptLong" Href="facturas">
+                    Ver facturas
+                </MudButton>
+                <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.ShoppingCart" Href="compras">
+                    Ver compras
+                </MudButton>
+                <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Person" Href="mis-datos">
+                    Editar datos
+                </MudButton>
+            </MudStack>
+        </MudPaper>
+    </MudItem>
+
+</MudGrid>
+
+@code {
+    private List<Movimiento> _movimientos = new()
+    {
+        new("24/12/2025", "Compra #A-1042", "$ 35.200"),
+        new("18/12/2025", "Pago factura #F-889", "$ 52.000"),
+        new("02/12/2025", "Compra #A-1011", "$ 18.900"),
+    };
+
+    private record Movimiento(string Fecha, string Detalle, string Importe);
+}

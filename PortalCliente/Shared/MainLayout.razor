@@ -1,0 +1,72 @@
+@inherits LayoutComponentBase
+
+<MudThemeProvider />
+<MudDialogProvider />
+<MudPopoverProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+
+    <!-- TOPBAR -->
+    <MudAppBar Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu"
+                       Color="Color.Inherit"
+                       Edge="Edge.Start"
+                       OnClick="ToggleDrawer" />
+
+        <MudText Typo="Typo.h6" Class="ml-2">Portal Cliente</MudText>
+
+        <MudSpacer />
+
+        <MudText Typo="Typo.body2" Class="mr-2">Hola, Julieta</MudText>
+        <MudAvatar Size="Size.Medium" Color="Color.Primary">J</MudAvatar>
+    </MudAppBar>
+
+    <!-- SIDEBAR -->
+    <MudDrawer @bind-Open="_drawerOpen"
+               Variant="DrawerVariant.Responsive"
+               Elevation="1"
+               ClipMode="DrawerClipMode.Always"
+               Width="280px">
+
+        <MudDrawerHeader>
+            <MudText Typo="Typo.h6">Menú</MudText>
+        </MudDrawerHeader>
+
+        <MudNavMenu>
+            <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Dashboard">
+                Inicio
+            </MudNavLink>
+
+            <MudNavLink Href="mis-datos" Icon="@Icons.Material.Filled.Person">
+                Mis datos
+            </MudNavLink>
+
+            <MudNavLink Href="compras" Icon="@Icons.Material.Filled.ShoppingCart">
+                Compras
+            </MudNavLink>
+
+            <MudNavLink Href="facturas" Icon="@Icons.Material.Filled.ReceiptLong">
+                Facturas
+            </MudNavLink>
+
+            <MudNavLink Href="autorizaciones" Icon="@Icons.Material.Filled.VerifiedUser">
+                Autorizaciones
+            </MudNavLink>
+        </MudNavMenu>
+    </MudDrawer>
+
+    <!-- CONTENIDO -->
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.False" Class="pa-4">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+
+</MudLayout>
+
+@code {
+    private bool _drawerOpen = true;
+
+    private void ToggleDrawer() => _drawerOpen = !_drawerOpen;
+}
