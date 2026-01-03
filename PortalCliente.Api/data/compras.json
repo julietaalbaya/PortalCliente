@@ -1,0 +1,28 @@
+[
+    {
+        "id": "C-1001",
+        "precio": 1250.50,
+        "estado": "Entregada"
+    },
+    {
+        "id": "C-1002",
+        "precio": 399.99,
+        "estado": "Pendiente de entrega"
+    },
+    {
+        "id": "C-1003",
+        "precio": 59.90,
+        "estado": "Devuelta"
+    },
+    {
+        "id": "C-1004",
+        "precio": 2450.00,
+        "estado": "Entregada"
+    },
+    {
+        "id": "C-1005",
+        "precio": 129.00,
+        "estado": "Pendiente de entrega"
+    }
+]
+

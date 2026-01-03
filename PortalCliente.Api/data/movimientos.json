@@ -1,0 +1,17 @@
+[
+    {
+        "fecha": "24/12/2025",
+        "detalle": "Compra #A-1042",
+        "importe": "$ 35.200"
+    },
+    {
+        "fecha": "18/12/2025",
+        "detalle": "Pago factura #F-889",
+        "importe": "$ 52.000"
+    },
+    {
+        "fecha": "02/12/2025",
+        "detalle": "Compra #A-1011",
+        "importe": "$ 18.900"
+    }
+]

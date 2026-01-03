@@ -1,0 +1,12 @@
+{
+    "personaTipo": "Persona Física",
+    "nombre": "Raúl",
+    "apellido": "Sosa",
+    "email": "raulsosa@gmail.com",
+    "cuil": "20-12870558-4",
+    "dni": "12870558",
+    "telefono1": "(0298) 4433619",
+    "telefono2": "(0298) 4433619",
+    "direccion1": "Leandro N. Alem n° 2244\nPiso: PB Depto: 3\nBarrio: Villa Obrera\nCP:8332\nEntre calles: General Roca y Rio Negro",
+    "direccion2": "Leandro N. Alem n° 2244\nPiso: PB Depto: 3\nBarrio: Villa Obrera\nCP:8332\nEntre calles: General Roca y Rio Negro"
+}
