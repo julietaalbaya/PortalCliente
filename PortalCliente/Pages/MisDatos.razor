@@ -1,5 +1,7 @@
 @page "/mis-datos"
 @using MudBlazor
+@using System.Net.Http.Json
+@inject HttpClient Http
 
 <MudText Typo="Typo.h5" GutterBottom="true">Mis datos</MudText>
 
@@ -108,16 +110,55 @@
 
 @code {
     private string personaTipo = "Persona Física";
-    private string nombre = "Raúl";
-    private string apellido = "Sosa";
-    private string email = "raulsosa@gmail.com";
-    private string cuil = "20-12870558-4";
-    private string dni = "12870558";
+    private string nombre = string.Empty;
+    private string apellido = string.Empty;
+    private string email = string.Empty;
+    private string cuil = string.Empty;
+    private string dni = string.Empty;
 
-    private string telefono1 = "(0298) 4433619";
-    private string telefono2 = "(0298) 4433619";
+    private string telefono1 = string.Empty;
+    private string telefono2 = string.Empty;
 
-    private string direccion1 = "Leandro N. Alem n° 2244\nPiso: PB Depto: 3\nBarrio: Villa Obrera\nCP:8332\nEntre calles: General Roca y Rio Negro";
-    private string direccion2 = "Leandro N. Alem n° 2244\nPiso: PB Depto: 3\nBarrio: Villa Obrera\nCP:8332\nEntre calles: General Roca y Rio Negro";
+    private string direccion1 = string.Empty;
+    private string direccion2 = string.Empty;
     private readonly string[] personaOptions = { "Persona Física", "Persona Jurídica" };
+
+    private class MisDatosDto
+    {
+        public string PersonaTipo { get; set; } = string.Empty;
+        public string Nombre { get; set; } = string.Empty;
+        public string Apellido { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Cuil { get; set; } = string.Empty;
+        public string Dni { get; set; } = string.Empty;
+        public string Telefono1 { get; set; } = string.Empty;
+        public string Telefono2 { get; set; } = string.Empty;
+        public string Direccion1 { get; set; } = string.Empty;
+        public string Direccion2 { get; set; } = string.Empty;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var data = await Http.GetFromJsonAsync<MisDatosDto>("misdatos");
+            if (data is not null)
+            {
+                personaTipo = data.PersonaTipo ?? personaTipo;
+                nombre = data.Nombre ?? nombre;
+                apellido = data.Apellido ?? apellido;
+                email = data.Email ?? email;
+                cuil = data.Cuil ?? cuil;
+                dni = data.Dni ?? dni;
+                telefono1 = data.Telefono1 ?? telefono1;
+                telefono2 = data.Telefono2 ?? telefono2;
+                direccion1 = data.Direccion1 ?? direccion1;
+                direccion2 = data.Direccion2 ?? direccion2;
+            }
+        }
+        catch
+        {
+            // ignored - keep defaults (or empty) if API fails
+        }
+    }
 }

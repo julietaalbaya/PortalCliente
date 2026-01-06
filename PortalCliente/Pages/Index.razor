@@ -1,4 +1,6 @@
 @page "/"
+@using System.Net.Http.Json
+@inject HttpClient Http
 
 <MudText Typo="Typo.h5" GutterBottom="true">Inicio</MudText>
 <MudText Typo="Typo.body2" Class="mb-4">
@@ -85,12 +87,26 @@
 </MudGrid>
 
 @code {
-    private List<Movimiento> _movimientos = new()
-    {
-        new("24/12/2025", "Compra #A-1042", "$ 35.200"),
-        new("18/12/2025", "Pago factura #F-889", "$ 52.000"),
-        new("02/12/2025", "Compra #A-1011", "$ 18.900"),
-    };
+    private List<Movimiento> _movimientos = new();
 
     private record Movimiento(string Fecha, string Detalle, string Importe);
+
+    private class MovimientosData
+    {
+        public List<Movimiento> Movimientos { get; set; } = new();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var data = await Http.GetFromJsonAsync<MovimientosData>("movimientos");
+            if (data?.Movimientos != null)
+                _movimientos = data.Movimientos;
+        }
+        catch
+        {
+            _movimientos = new();
+        }
+    }
 }

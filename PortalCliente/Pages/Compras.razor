@@ -1,5 +1,7 @@
 @page "/compras"
 @using MudBlazor
+@using System.Net.Http.Json
+@inject HttpClient Http
 
 <MudPaper Class="pa-0" Elevation="0">
 	<MudTable Items="filteredCompras" Dense="true" Hover="true">
@@ -46,19 +48,39 @@
 @code {
 	private string search = string.Empty;
 
-	private record Compra(string Id, decimal Precio, string Estado);
-
-	private List<Compra> compras = new List<Compra>
+	private class Compra
 	{
-		new Compra("C-1001", 1250.50m, "Entregada"),
-		new Compra("C-1002", 399.99m, "Pendiente de entrega"),
-		new Compra("C-1003", 59.90m, "Devuelta"),
-		new Compra("C-1004", 2450.00m, "Entregada"),
-		new Compra("C-1005", 129.00m, "Pendiente de entrega"),
-	};
+		public string Id { get; set; } = string.Empty;
+		public decimal Precio { get; set; }
+		public string Estado { get; set; } = string.Empty;
+	}
+
+	private class ComprasData
+	{
+		public List<Compra> Compras { get; set; } = new List<Compra>();
+	}
+
+	private List<Compra> compras = new List<Compra>();
 
 	private IEnumerable<Compra> filteredCompras => compras
 		.Where(c => string.IsNullOrWhiteSpace(search)
 			|| c.Id.Contains(search, StringComparison.OrdinalIgnoreCase)
 			|| c.Estado.Contains(search, StringComparison.OrdinalIgnoreCase));
+
+	protected override async Task OnInitializedAsync()
+	{
+		try
+		{
+			var data = await Http.GetFromJsonAsync<ComprasData>("compras");
+			if (data?.Compras != null)
+			{
+				compras = data.Compras;
+			}
+		}
+		catch
+		{
+			// ignore errors for now (could log or show message)
+			compras = new List<Compra>();
+		}
+	}
 }
