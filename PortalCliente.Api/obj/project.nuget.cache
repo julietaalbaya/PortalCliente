@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Tl87toJTAAI=",
+  "dgSpecHash": "rrhYYcoIC8I=",
   "success": true,
-  "projectFilePath": "c:\\PortalCliente\\PortalCliente.Api\\PortalCliente.Api.csproj",
+  "projectFilePath": "C:\\PortalCliente\\PortalCliente.Api\\PortalCliente.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\julie\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.1\\microsoft.aspnetcore.openapi.10.0.1.nupkg.sha512",
     "C:\\Users\\julie\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512"
