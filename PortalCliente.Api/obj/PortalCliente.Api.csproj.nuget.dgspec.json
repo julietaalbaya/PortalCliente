@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\PortalCliente\\PortalCliente.Api\\PortalCliente.Api.csproj": {}
+    "c:\\PortalCliente\\PortalCliente.Api\\PortalCliente.Api.csproj": {}
   },
   "projects": {
-    "C:\\PortalCliente\\PortalCliente.Api\\PortalCliente.Api.csproj": {
+    "c:\\PortalCliente\\PortalCliente.Api\\PortalCliente.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\PortalCliente\\PortalCliente.Api\\PortalCliente.Api.csproj",
+        "projectUniqueName": "c:\\PortalCliente\\PortalCliente.Api\\PortalCliente.Api.csproj",
         "projectName": "PortalCliente.Api",
-        "projectPath": "C:\\PortalCliente\\PortalCliente.Api\\PortalCliente.Api.csproj",
+        "projectPath": "c:\\PortalCliente\\PortalCliente.Api\\PortalCliente.Api.csproj",
         "packagesPath": "C:\\Users\\julie\\.nuget\\packages\\",
-        "outputPath": "C:\\PortalCliente\\PortalCliente.Api\\obj\\",
+        "outputPath": "c:\\PortalCliente\\PortalCliente.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\julie\\AppData\\Roaming\\NuGet\\NuGet.Config",
